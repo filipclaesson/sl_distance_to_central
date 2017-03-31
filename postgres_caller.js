@@ -1,34 +1,9 @@
 var pg = require('pg');
-
-// -- postgres pass
-// var pass;
-// fs = require('fs')
-// // fs.readFile('/home/pi/node_apps/postgres_pass.txt', 'utf8', function (err,data) {
-//     fs.readFile('/Users/Filip/postgres_pass.txt', 'utf8', function (err,data) {
-//   if (err) {
-//     return console.log(err);
-//   }
-//   pass = data;
-// });
-// -- -- -- -- -- -- 
-
-
 promise = require('promise');
 var options = {
     promiseLib: promise
 };
 var pgp = require('pg-promise')(options);
-//raspi
-
-// local
-// var cn = {
-//     host: 'localhost',
-//     port: 5432,
-//     database: 'postgres',
-//     user: 'postgres',
-//     password: "lagge"
-// };
-
 
 function getDB(){
     var pass;
