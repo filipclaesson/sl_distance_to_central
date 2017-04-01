@@ -13,7 +13,7 @@ var SLGeodata = [];
 
 
 
-Postgres.runQuery("select distinct lon_short as lon,lat_short as lat from view_of_apt_sl where avg_time_to_central is null limit 2", db, function(data){
+Postgres.runQuery("select distinct lon_short as lon,lat_short as lat from view_of_apt_sl where avg_time_to_central is null", db, function(data){
 	console.log(data.data)
 	geoLocationsToLookup = data.data
 	if(data.data.length > 0){

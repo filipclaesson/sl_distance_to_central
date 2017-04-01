@@ -81,7 +81,7 @@ function insertMultiApartments(dataIn, db,callback) {
             dataQueries.push(t.none(query[0], query[1]))
         }
         // this.ctx = transaction config + state context;
-        console.log(dataQueries)
+        c
         return t.batch(dataQueries);
     })
     .then(function (data) {
@@ -137,8 +137,6 @@ function getInsertQueryForSLGeo(slObject){
     slObject.distanceVariables[0].max_walk,
     slObject.distanceVariables[0].departures_per_hour
     ]
-    console.log(queryString)
-    console.log(data)
     return [queryString, data];
 }
 
