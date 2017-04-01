@@ -39,7 +39,7 @@ function calcDistVars(lon, lat, name, callbackToBackend) {
             	tripList = parsed.TripList.Trip;
             	createStructuredObjects(tripList, lon, lat, callbackToBackend);	
             }else{
-            	callbackToBackend({isSuccess: false})
+            	callbackToBackend({isSuccess: false,lat:lat, lon:lon})
             }
             
         });

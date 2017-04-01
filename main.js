@@ -14,7 +14,7 @@ var SLGeodata = [];
 Postgres.runQuery("select distinct lon_short as lon,lat_short as lat from view_of_apt_sl where avg_time_to_central is null limit 2", db, function(data){
 
 
-	console.log(data.data)
+	//console.log(data.data)
 	geoLocationsToLookup = data.data
 
 	if(data.data.length > 0){
@@ -32,7 +32,7 @@ function getNext(){
 	}
 	else{
 		console.log("--- inserting in database ----")
-		console.log(SLGeodata)
+		//console.log(SLGeodata)
 		Postgres.insertMultiSLgeo(SLGeodata,db, function(){console.log(" ------ Everything is finished ------")})
 		//Postgres.insertMultiSLgeo(geoLocationsToLookup,db, function(){console.log(" ------ Everything is finished ------")})
 	}	
@@ -47,10 +47,12 @@ function getNextDelay(){
 var saveSLData = function(SLdata){
 	if (SLdata.isSuccess){
 		console.log('--- getting SL data for lookup: ' + (counter+1) + ' of ' + geoLocationsToLookup.length + ' : Success')
-		SLGeodata.push(SLdata.variables)
+		//SLGeodata.push(SLdata.variables)
 		//geoLocationsToLookup[counter].distanceVariables = SLdata.variables
 	}else{
 		console.log('--- getting SL data for lookup: ' + (counter+1) + ' of ' + geoLocationsToLookup.length + ' : Success')
+		console.log("NOTE: cound not get data for:");
+		console.log(SLdata.lon + ", " + SLdata.lat)
 	}
 	getNextDelay()
 }
