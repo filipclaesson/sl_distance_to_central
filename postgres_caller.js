@@ -53,8 +53,10 @@ function runQuery(query,db, callback) {
 function insertMultiSLgeo(dataIn, db, callback) {
     dataQueries = []; 
     //var db = pgp(cn);
+
     db.tx(function(t) {
         for (i in dataIn){
+
             query = getInsertQueryForSLGeo(dataIn[i])
             dataQueries.push(t.none(query[0], query[1]))
         }
@@ -81,7 +83,7 @@ function insertMultiApartments(dataIn, db,callback) {
             dataQueries.push(t.none(query[0], query[1]))
         }
         // this.ctx = transaction config + state context;
-        c
+        
         return t.batch(dataQueries);
     })
     .then(function (data) {
@@ -127,16 +129,17 @@ function getInsertQueryForSLGeo(slObject){
 
     //queryString = "insert into apartments(booli_id,sold_date,address,areas,lon,lat,room,floor,sqm,listprice,price_up,sold_price,rent,distance_to_ocean,construction_year,object_type,broker,broker_id,broker_type) select $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19 where not exists (select 1 from apartments a where a.booli_id = $1::text)";
     data = [
-    slObject.lon,
-    slObject.lat,
-    slObject.avg_time,
-    slObject.min_time,
-    slObject.max_time,
-    slObject.avg_walk_distance,
-    slObject.min_walk,
-    slObject.max_walk,
-    slObject.departures_per_hour
+    slObject[0].lon,
+    slObject[0].lat,
+    slObject[0].avg_time,
+    slObject[0].min_time,
+    slObject[0].max_time,
+    slObject[0].avg_walk_distance,
+    slObject[0].min_walk,
+    slObject[0].max_walk,
+    slObject[0].departures_per_hour
     ]
+
     return [queryString, data];
 }
 

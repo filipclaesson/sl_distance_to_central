@@ -11,10 +11,8 @@ var Apartments = "";
 var geoLocationsToLookup = [];
 var SLGeodata = [];
 
+Postgres.runQuery("select distinct lon_short as lon,lat_short as lat from view_of_apt_sl where avg_time_to_central is null limit 2", db, function(data){
 
-
-//Postgres.runQuery("select distinct lon_short as lon,lat_short as lat from view_of_apt_sl where avg_time_to_central is null limit 2", db, function(data){
-Postgres.runQuery("select '17.979'::text as lon, '59.460'::text as lat", db, function(data){
 
 	console.log(data.data)
 	geoLocationsToLookup = data.data
@@ -34,7 +32,6 @@ function getNext(){
 	}
 	else{
 		console.log("--- inserting in database ----")
-		console.log(SLGeodata)
 		Postgres.insertMultiSLgeo(SLGeodata,db, function(){console.log(" ------ Everything is finished ------")})
 		//Postgres.insertMultiSLgeo(geoLocationsToLookup,db, function(){console.log(" ------ Everything is finished ------")})
 	}	
