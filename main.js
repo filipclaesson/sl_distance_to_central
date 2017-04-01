@@ -32,6 +32,7 @@ function getNext(){
 	}
 	else{
 		console.log("--- inserting in database ----")
+		console.log(SLGeodata)
 		Postgres.insertMultiSLgeo(SLGeodata,db, function(){console.log(" ------ Everything is finished ------")})
 		//Postgres.insertMultiSLgeo(geoLocationsToLookup,db, function(){console.log(" ------ Everything is finished ------")})
 	}	

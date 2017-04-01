@@ -60,9 +60,13 @@ function insertMultiSLgeo(dataIn, db, callback) {
             dataQueries.push(t.none(query[0], query[1]))
         }
         // this.ctx = transaction config + state context;
+        console.log("------ just before sending batch querie to db ------")
+        console.log(dataQueries)
         return t.batch(dataQueries);
     })
     .then(function (data) {
+        console.log("------ message from db ------")
+        console.log(data)
         console.log("---------------------------------------")
         console.log("-- Db finished with Success ..." );
         console.log("---------------------------------------")
@@ -89,6 +93,8 @@ function getInsertQueryForSLGeo(slObject){
     slObject[0].max_walk,
     slObject[0].departures_per_hour
     ]
+    console.log("------ get insert query ------")
+    console.log(data)
 
     return [queryString, data];
 }
