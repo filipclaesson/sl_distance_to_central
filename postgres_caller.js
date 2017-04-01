@@ -56,7 +56,6 @@ function insertMultiSLgeo(dataIn, db, callback) {
 
     db.tx(function(t) {
         for (i in dataIn){
-
             query = getInsertQueryForSLGeo(dataIn[i])
             dataQueries.push(t.none(query[0], query[1]))
         }
@@ -74,55 +73,6 @@ function insertMultiSLgeo(dataIn, db, callback) {
     });
 }
 
-function insertMultiApartments(dataIn, db,callback) {
-    dataQueries = []; 
-    //var db = pgp(cn);
-    db.tx(function(t) {
-        for (i in dataIn){
-            query = getInsertQueryForApartments(dataIn[i])
-            dataQueries.push(t.none(query[0], query[1]))
-        }
-        // this.ctx = transaction config + state context;
-        
-        return t.batch(dataQueries);
-    })
-    .then(function (data) {
-        console.log("---------------------------------------")
-        console.log("-- Step 6: Db finished with Success ..." );
-        console.log("---------------------------------------")
-        // success;
-    })
-    .catch(function (error) {
-        console.log("ERROR:", error.message || error);
-    });
-}
-
-function getInsertQueryForApartments(aptObject){
-    // queryString = "insert into apartments(booli_id, address, distance_to_ocean, areas, lon, lat, room, floor, sqm, listprice, price_up, sold_price, rent, construction_year, object_type, broker, broker_id, broker_type, avg_time_to_central, min_time_to_central, max_time_to_central, avg_commuting_walk_distance, min_commuting_walk_distance, max_commuting_walk_distance, avg_commuting_departures_per_hour) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25)";
-    queryString = "insert into apartments(booli_id,sold_date,address,areas,lon,lat,room,floor,sqm,listprice,price_up,sold_price,rent,distance_to_ocean,construction_year,object_type,broker,broker_id,broker_type) select $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19 where not exists (select 1 from apartments a where a.booli_id = $1::text)";
-    data = [
-    aptObject.booliId,
-    aptObject.soldDate,
-    aptObject.address,
-    aptObject.areas,
-    aptObject.lon,
-    aptObject.lat,
-    aptObject.room,
-    aptObject.floor,
-    aptObject.sqm,
-    aptObject.listPrice,
-    aptObject.priceUp,
-    aptObject.soldPrice,
-    aptObject.rent,
-    aptObject.distanceToOcean,
-    aptObject.constructionYear,
-    aptObject.objectType,
-    aptObject.broker,
-    aptObject.brokerId,
-    aptObject.brokerType
-    ]
-    return [queryString, data];
-}
 
 function getInsertQueryForSLGeo(slObject){
     queryString = "insert into geo_data_sl(lon, lat, avg_time_to_central, min_time_to_central, max_time_to_central, avg_commuting_walk_distance, min_commuting_walk_distance, max_commuting_walk_distance, avg_commuting_departures_per_hour) values($1,$2,$3,$4,$5,$6,$7,$8,$9)";
@@ -146,6 +96,5 @@ function getInsertQueryForSLGeo(slObject){
 module.exports = {
   runQuery: runQuery,
   insertMultiSLgeo: insertMultiSLgeo,
-  insertMultiApartments: insertMultiApartments,
   getDB:getDB
 };
