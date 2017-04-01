@@ -81,6 +81,7 @@ function insertMultiApartments(dataIn, db,callback) {
             dataQueries.push(t.none(query[0], query[1]))
         }
         // this.ctx = transaction config + state context;
+        console.log(dataQueries)
         return t.batch(dataQueries);
     })
     .then(function (data) {
@@ -123,6 +124,7 @@ function getInsertQueryForApartments(aptObject){
 
 function getInsertQueryForSLGeo(slObject){
     queryString = "insert into geo_data_sl(lon, lat, avg_time_to_central, min_time_to_central, max_time_to_central, avg_commuting_walk_distance, min_commuting_walk_distance, max_commuting_walk_distance, avg_commuting_departures_per_hour) values($1,$2,$3,$4,$5,$6,$7,$8,$9)";
+
     //queryString = "insert into apartments(booli_id,sold_date,address,areas,lon,lat,room,floor,sqm,listprice,price_up,sold_price,rent,distance_to_ocean,construction_year,object_type,broker,broker_id,broker_type) select $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19 where not exists (select 1 from apartments a where a.booli_id = $1::text)";
     data = [
     slObject.lon,
@@ -135,6 +137,8 @@ function getInsertQueryForSLGeo(slObject){
     slObject.distanceVariables[0].max_walk,
     slObject.distanceVariables[0].departures_per_hour
     ]
+    console.log(queryString)
+    console.log(data)
     return [queryString, data];
 }
 
