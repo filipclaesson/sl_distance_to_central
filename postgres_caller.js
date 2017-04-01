@@ -129,13 +129,13 @@ function getInsertQueryForSLGeo(slObject){
     data = [
     slObject.lon,
     slObject.lat,
-    slObject.distanceVariables[0].avg_time,
-    slObject.distanceVariables[0].min_time,
-    slObject.distanceVariables[0].max_time,
-    slObject.distanceVariables[0].avg_walk_distance,
-    slObject.distanceVariables[0].min_walk,
-    slObject.distanceVariables[0].max_walk,
-    slObject.distanceVariables[0].departures_per_hour
+    slObject.avg_time,
+    slObject.min_time,
+    slObject.max_time,
+    slObject.avg_walk_distance,
+    slObject.min_walk,
+    slObject.max_walk,
+    slObject.departures_per_hour
     ]
     return [queryString, data];
 }

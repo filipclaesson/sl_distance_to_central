@@ -32,6 +32,7 @@ function calcDistVars(lon, lat, name, callbackToBackend) {
             // Data recevied, do whatever with it!
             
             var parsed = JSON.parse(body);
+            
 
             if (parsed.TripList.errorCode == null){
             	var parsed = JSON.parse(body);
