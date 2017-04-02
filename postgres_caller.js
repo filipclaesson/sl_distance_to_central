@@ -93,7 +93,7 @@ function getInsertQueryForSLGeo(slObject){
     slObject[0].max_walk,
     slObject[0].departures_per_hour
     ]
-    console.log("------ get insert query ------")
+    //console.log("------ get insert query ------")
     //console.log(data)
 
     return [queryString, data];
