@@ -1,4 +1,3 @@
-var pg = require('pg');
 promise = require('promise');
 var options = {
     promiseLib: promise
